@@ -4,8 +4,13 @@ const controller = require('lib/wiring/controller');
 const models = require('app/models');
 const Blogpost = models.blogpost;
 
+const authenticate = require('./concerns/authenticate');
+
 const create = (req, res, next) => {
-  let blogpost = Object.assign(req.body.blogpost);
+  let blogpost = Object.assign(req.body.blogpost, {
+    _owner: req.currentUser._id,
+  });
+
   // console.log(req.body);
 
   Blogpost.create(blogpost)
@@ -68,4 +73,6 @@ module.exports = controller({
   show,
   update,
   destroy,
-});
+}, { before: [
+  { method: authenticate, except: ['index', 'show'] },
+], });
