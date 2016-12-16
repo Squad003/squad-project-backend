@@ -35,25 +35,25 @@ const show = (req, res, next) => {
 
 const update = (req, res, next) => {
   console.log(req.body);
-  let search = { _id: req.params.id/*, _owner: req.currentUser._id*/ };
+  let search = { _id: req.params.id, _owner: req.currentUser._id };
   Blogpost.findOne(search)
     .then(blogpost => {
       if (!blogpost) {
         return next();
       }
+
       console.log(req.body.blogpost);
 
-      // delete req.body._owner;  // disallow owner reassignment.
+      delete req.body._owner;  // disallow owner reassignment.
       Blogpost.update(req.body.blogpost);
       return blogpost.update(req.body.blogpost)
         .then(() => res.sendStatus(200));
     })
     .catch(err => next(err));
-    // Blogpost.update(req.body.blogpost);
 };
 
 const destroy = (req, res, next) => {
-  let search = { _id: req.params.id/*, _owner: req.currentUser._id*/ };
+  let search = { _id: req.params.id, _owner: req.currentUser._id };
   Blogpost.findOne(search)
     .then(blogpost => {
       if (!blogpost) {

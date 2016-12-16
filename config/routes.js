@@ -22,5 +22,4 @@ module.exports = require('lib/wiring/routes')
 .get('/blogposts/:id', 'blogposts#show')
 .patch('/blogposts/:id', 'blogposts#update')
 .delete('/blogposts/:id', 'blogposts#destroy')
-// all routes created
 ;
