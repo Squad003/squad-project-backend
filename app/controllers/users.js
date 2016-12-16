@@ -63,6 +63,7 @@ const signup = (req, res, next) => {
     .catch(makeErrorHandler(res, next));
   } else {
     let error = { name: 'ValidationError' };
+
     makeErrorHandler(res, next)(error);
   }
 };
