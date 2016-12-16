@@ -1,11 +1,12 @@
 API="http://localhost:4741"
 URL_PATH="/blogposts"
-TITLE="BlogPost5"
-CONTENT="Content5"
+TITLE='Blogpost4'
+CONTENT='Content4'
+ID=58540b25d94ff9a1992d2163
 
-curl "${API}${URL_PATH}" \
+curl "${API}${URL_PATH}/${ID}" \
   --include \
-  --request POST \
+  --request PATCH \
   --header "Content-Type: application/json" \
   --data '{
     "blogpost": {

@@ -59,7 +59,6 @@ const signup = (req, res, next) => {
     delete user.passwordDigest;
     res.json({ user });
   }).catch(makeErrorHandler(res, next));
-
 };
 
 const signin = (req, res, next) => {
