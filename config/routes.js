@@ -17,9 +17,11 @@ module.exports = require('lib/wiring/routes')
 .patch('/change-password/:id', 'users#changepw')
 .resources('users', { only: ['index', 'show'] })
 
+// CRUD routes
 .post('/blogposts', 'blogposts#create')
 .get('/blogposts', 'blogposts#index')
 .get('/blogposts/:id', 'blogposts#show')
+.get('/blogposts/:user_id', 'blogposts#indexUserBp')
 .patch('/blogposts/:id', 'blogposts#update')
 .delete('/blogposts/:id', 'blogposts#destroy')
 ;

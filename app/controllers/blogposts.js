@@ -11,8 +11,6 @@ const create = (req, res, next) => {
     _owner: req.currentUser._id,
   });
 
-  // console.log(req.body);
-
   Blogpost.create(blogpost)
     .then(blogpost => res.json({ blogpost }))
     .catch(err => next(err));
@@ -22,6 +20,23 @@ const index = (req, res, next) => {
   console.log(req.body);
   Blogpost.find()
     .then(blogposts => res.json({ blogposts }))
+    .catch(err => next(err));
+};
+
+const indexUserBp = (req, res, next) => {
+  let search = { _owner: req.currentUser._id };
+  console.log('search ', search);
+  Blogpost.find(search)
+    .then((blogposts) => {
+      if (!blogposts) {
+        console.log('are we getting here?');
+        return next();
+      } else {
+        console.log('blog posts ', blogposts);
+        return blogposts;
+      }
+    })
+    .then(blogposts => blogposts ? res.json({ blogposts }) : next())
     .catch(err => next(err));
 };
 
@@ -70,6 +85,7 @@ const destroy = (req, res, next) => {
 module.exports = controller({
   create,
   index,
+  indexUserBp,
   show,
   update,
   destroy,

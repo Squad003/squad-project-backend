@@ -2,8 +2,8 @@
 
 API="http://localhost:4741"
 URL_PATH="/sign-out"
-TOKEN="OWc17eij70YdnEgRK+0tDrZi0my7/F5NJHGe18wmTFA=--HQmgUZBgoAsU1iW/GcnDfAMUFF+Xm+TjXwDeIQ/2P8Q="
-ID="585419c72c4deff94b527104"
+TOKEN="leWyxPAyvnxunLrXN1rWNLmIK82At/R7eb6OOjSqs9g=--nVq394wu+J9Yz6HK6KqvxqWKU8GSNvripgznpze5euY="
+ID="585443b262c26f0746c12ba5"
 
 curl "${API}${URL_PATH}/${ID}" \
   --include \

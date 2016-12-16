@@ -1,17 +1,12 @@
 'use strict';
 
 const debug = require('debug')('chundlr:users');
-
 const controller = require('lib/wiring/controller');
 const models = require('app/models');
 const User = models.user;
-
 const crypto = require('crypto');
-
 const authenticate = require('./concerns/authenticate');
-
 const HttpError = require('lib/wiring/http-error');
-
 const MessageVerifier = require('lib/wiring/message-verifier');
 
 const encodeToken = (token) => {
