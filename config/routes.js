@@ -24,4 +24,10 @@ module.exports = require('lib/wiring/routes')
 .get('/blogposts/:user_id', 'blogposts#indexUserBp')
 .patch('/blogposts/:id', 'blogposts#update')
 .delete('/blogposts/:id', 'blogposts#destroy')
+
+.post('/pages', 'pages#create')
+.patch('/pages/:id', 'pages#update')
+.get('/pages/:id', 'pages#show')
+.delete('/pages/:id', 'pages#destroy')
+.get('/pages/:user_id', 'pages#indexUsersPages')
 ;
