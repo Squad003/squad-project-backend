@@ -23,6 +23,7 @@ const getToken = () =>
 
 const userFilter = { passwordDigest: 0, token: 0 };
 
+
 const index = (req, res, next) => {
   User.find({}, userFilter)
     .then(users => res.json({ users }))
@@ -120,5 +121,5 @@ module.exports = controller({
   signout,
   changepw,
 }, { before: [
-  { method: authenticate, except: ['signup', 'signin'] },
+  { method: authenticate, except: ['signup', 'signin', 'index'] },
 ], });
