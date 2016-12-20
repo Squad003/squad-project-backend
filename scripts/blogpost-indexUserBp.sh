@@ -1,7 +1,7 @@
 #!/bin/bash
 
-ID="585443c562c26f0746c12ba6"
-TOKEN="r0VuzjyFIFn/sU6A6k4x5683H65uHF5ca76Pjd0Id1A=--4HfBOROy3Y8OejJmi2jr/K29BJs714g4RWZ5pGVy3LI="
+ID="5857f602b55fc969f925f2c1"
+TOKEN="+qED0MXnPKS2iJg7OcEN7QT6ilT7wUb00pxhpcvQljM=--a2x/SR461Do2ogBguAWyM8KyTLs/jrhgerh8n6tH54M="
 
-curl --include --request GET http://localhost:4741/blogposts/$ID \
+curl --include --request GET http://localhost:4741/blogposts/me/$ID \
   --header "Authorization: Token token=$TOKEN"

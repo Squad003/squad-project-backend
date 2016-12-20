@@ -29,7 +29,24 @@ const show = (req, res, next) => {
 
 const indexUsersPages = (req, res, next) => {
   let search = { _owner: req.currentUser._id };
-  console.log('search ', search);
+  console.log(search);
+  Page.find(search)
+    .then((pages) => {
+      if (!pages) {
+        console.log('are we getting here?');
+        return next();
+      } else {
+        console.log('pages ', pages);
+        return pages;
+      }
+    })
+    .then(pages => pages ? res.json({ pages }) : next())
+    .catch(err => next(err));
+};
+
+const indexOthersPages = (req, res, next) => {
+  let search = { _owner: req.params.other_user_id };
+  console.log('search ', req.params.other_user_id);
   Page.find(search)
     .then((pages) => {
       if (!pages) {
@@ -84,6 +101,7 @@ module.exports = controller({
   show,
   destroy,
   indexUsersPages,
+  indexOthersPages,
 }, { before: [
-  { method: authenticate, except: [/*'index',*/ 'show'] },
+  { method: authenticate, except: ['indexOthersPages', 'show'] },
 ], });

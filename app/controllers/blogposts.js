@@ -40,6 +40,23 @@ const indexUserBp = (req, res, next) => {
     .catch(err => next(err));
 };
 
+const indexOthersPosts = (req, res, next) => {
+  let search = { _owner: req.params.other_user_id };
+  console.log('search ', req.params.other_user_id);
+  Blogpost.find(search)
+    .then((blogposts) => {
+      if (!blogposts) {
+        console.log('are we getting here?');
+        return next();
+      } else {
+        console.log('blogposts ', blogposts);
+        return blogposts;
+      }
+    })
+    .then(blogposts => blogposts ? res.json({ blogposts }) : next())
+    .catch(err => next(err));
+};
+
 const show = (req, res, next) => {
   console.log(req.params.id);
   Blogpost.findById(req.params.id)
@@ -86,9 +103,10 @@ module.exports = controller({
   create,
   index,
   indexUserBp,
+  indexOthersPosts,
   show,
   update,
   destroy,
 }, { before: [
-  { method: authenticate, except: ['index', 'show'] },
+  { method: authenticate, except: ['index', 'show', 'indexOthersPosts'] },
 ], });

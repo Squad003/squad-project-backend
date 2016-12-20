@@ -1,5 +1,5 @@
 ID="5857f602b55fc969f925f2c1"
-TOKEN="NvYZ5Fq/ZSV4F2tEq8SOzQUC9bq3sPmq/l/Q/fepG1k=--c7WtGt/2uJ89W689c8i/NC6DQE4MFuT2D7mfxu6u49w="
+TOKEN="+qED0MXnPKS2iJg7OcEN7QT6ilT7wUb00pxhpcvQljM=--a2x/SR461Do2ogBguAWyM8KyTLs/jrhgerh8n6tH54M="
 
-curl --include --request GET http://localhost:4741/pages/$ID \
+curl --include --request GET http://localhost:4741/pages/me/$ID \
   --header "Authorization: Token token=$TOKEN"
