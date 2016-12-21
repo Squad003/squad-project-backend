@@ -7,8 +7,8 @@ const Page = models.page;
 const authenticate = require('./concerns/authenticate');
 
 const create = (req, res, next) => {
-  console.log(req.body);
-  console.log(req.currentUser);
+  // console.log(req.body);
+  // console.log(req.currentUser);
   let page = Object.assign(req.body.page, {
     _owner: req.currentUser._id,
   });
@@ -20,23 +20,23 @@ const create = (req, res, next) => {
 };
 
 const show = (req, res, next) => {
-  console.log(req.params.id);
+  // console.log(req.params.id);
   Page.findById(req.params.id)
     .then(page => page ? res.json({ page }) : next())
     .catch(err => next(err));
-  console.log(res.body);
+  // console.log(res.body);
 };
 
 const indexUsersPages = (req, res, next) => {
   let search = { _owner: req.currentUser._id };
-  console.log(search);
+  // console.log(search);
   Page.find(search)
     .then((pages) => {
       if (!pages) {
-        console.log('are we getting here?');
+        // console.log('are we getting here?');
         return next();
       } else {
-        console.log('pages ', pages);
+        // console.log('pages ', pages);
         return pages;
       }
     })
@@ -46,14 +46,14 @@ const indexUsersPages = (req, res, next) => {
 
 const indexOthersPages = (req, res, next) => {
   let search = { _owner: req.params.other_user_id };
-  console.log('search ', req.params.other_user_id);
+  // console.log('search ', req.params.other_user_id);
   Page.find(search)
     .then((pages) => {
       if (!pages) {
-        console.log('are we getting here?');
+        // console.log('are we getting here?');
         return next();
       } else {
-        console.log('pages ', pages);
+        // console.log('pages ', pages);
         return pages;
       }
     })
@@ -62,7 +62,7 @@ const indexOthersPages = (req, res, next) => {
 };
 
 const update = (req, res, next) => {
-  console.log(req.body);
+  // console.log(req.body);
   let search = { _id: req.params.id, _owner: req.currentUser._id };
   Page.findOne(search)
     .then(page => {
@@ -70,7 +70,7 @@ const update = (req, res, next) => {
         return next();
       }
 
-      console.log(req.body.page);
+      // console.log(req.body.page);
 
       delete req.body._owner;  // disallow owner reassignment.
       Page.update(req.body.page);
