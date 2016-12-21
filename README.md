@@ -64,9 +64,10 @@ echo SECRET_KEY=$(/usr/local/opt/openssl/bin/openssl rand -base64 66 | tr -d '\n
 | DELETE | `/pages/:id`           | `pages#destroy`         |
 
 ## Links
-[Front End Application](https://squad003.github.io/front-end/)
-[Back Repository](https://github.com/Squad003/squad-project-backend)
-[Back End Application](https://agile-forest-14016.herokuapp.com)
+* [Front End Application](https://squad003.github.io/front-end/)
+* [Front End Repo](https://github.com/Squad003/front-end)
+* [Back Repository](https://github.com/Squad003/squad-project-backend)
+* [Back End Application](https://agile-forest-14016.herokuapp.com)
 
 ## [License](https://opensource.org/licenses/MIT)
 
