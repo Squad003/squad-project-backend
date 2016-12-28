@@ -25,7 +25,7 @@ const index = (req, res, next) => {
 
 const indexUserBp = (req, res, next) => {
   let search = { _owner: req.currentUser._id };
-  console.log('search ', search);
+  console.log('search indexUserBp ', search);
   Blogpost.find(search)
     .then((blogposts) => {
       if (!blogposts) {
@@ -42,7 +42,7 @@ const indexUserBp = (req, res, next) => {
 
 const indexOthersPosts = (req, res, next) => {
   let search = { _owner: req.params.other_user_id };
-  console.log('search ', req.params.other_user_id);
+  console.log('search in others', req.params.other_user_id);
   Blogpost.find(search)
     .then((blogposts) => {
       if (!blogposts) {
@@ -99,6 +99,24 @@ const destroy = (req, res, next) => {
     .catch(err => next(err));
 };
 
+const searchPosts = (req, res, next) => {
+  console.log('in search ', req.query.blogpost.title);
+
+  // query contains the title which we are searching for.
+  let query = req.query.blogpost.title;
+
+  // define a regular expression where query is the pattern
+  // we are searching for
+  // 'i' indicates that we are ignoring case.
+  let regex = new RegExp(query, 'i');
+
+  // Find in Blogpost collection for the title that has the regular
+  // expression that we are searching for, and return it as json.
+  Blogpost.find({title:regex})
+    .then(blogposts => res.json({ blogposts }))
+    .catch(err => next(err));
+};
+
 module.exports = controller({
   create,
   index,
@@ -107,6 +125,7 @@ module.exports = controller({
   show,
   update,
   destroy,
+  searchPosts,
 }, { before: [
-  { method: authenticate, except: ['index', 'show', 'indexOthersPosts'] },
+  { method: authenticate, except: ['index', 'show', 'indexOthersPosts', 'searchPosts'] },
 ], });

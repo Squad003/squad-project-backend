@@ -2,8 +2,8 @@
 
 API="http://localhost:4741"
 URL_PATH="/sign-up"
-EMAIL="alex@boogie.com"
-PASSWORD="alex"
+EMAIL="lu@boogie.com"
+PASSWORD="lu"
 
 curl "${API}${URL_PATH}" \
   --include \
