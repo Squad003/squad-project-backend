@@ -15,6 +15,7 @@ module.exports = require('lib/wiring/routes')
 .post('/sign-in', 'users#signin')
 .delete('/sign-out/:id', 'users#signout')
 .patch('/change-password/:id', 'users#changepw')
+.get('/search-users', 'users#searchUsers')
 .resources('users', { only: ['index', 'show'] })
 
 // CRUD routes
@@ -25,6 +26,7 @@ module.exports = require('lib/wiring/routes')
 .get('/blogposts/:other_user_id', 'blogposts#indexOthersPosts')
 .patch('/blogposts/:id', 'blogposts#update')
 .delete('/blogposts/:id', 'blogposts#destroy')
+.get('/search-posts', 'blogposts#searchPosts')
 
 .post('/pages', 'pages#create')
 .patch('/pages/:id', 'pages#update')

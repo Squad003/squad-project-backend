@@ -44,7 +44,7 @@ const makeErrorHandler = (res, next) =>
 
 const signup = (req, res, next) => {
   let credentials = req.body.credentials;
-  let user = { email: credentials.email, password: credentials.password };
+  let user = { user_name: credentials.user_name, email: credentials.email, password: credentials.password };
   if (credentials.password === credentials.password_confirmation) {
     getToken().then(token =>
       user.token = token
@@ -113,6 +113,24 @@ const changepw = (req, res, next) => {
   ).catch(makeErrorHandler(res, next));
 };
 
+const searchUsers = (req, res, next) => {
+  console.log('in search ', req.query.user.user_name);
+
+  // query contains the title which we are searching for.
+  let query = req.query.user.user_name;
+
+  // define a regular expression where query is the pattern
+  // we are searching for
+  // 'i' indicates that we are ignoring case.
+  let regex = new RegExp(query, 'i');
+
+  // Find in User collection for the user_name that has the regular
+  // expression that we are searching for, and return it as json.
+  User.find({user_name:regex})
+    .then(users => res.json({ users }))
+    .catch(err => next(err));
+};
+
 module.exports = controller({
   index,
   show,
@@ -120,6 +138,7 @@ module.exports = controller({
   signin,
   signout,
   changepw,
+  searchUsers,
 }, { before: [
-  { method: authenticate, except: ['signup', 'signin', 'index'] },
+  { method: authenticate, except: ['signup', 'signin', 'index', 'searchUsers'] },
 ], });
